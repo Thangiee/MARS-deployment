@@ -1,0 +1,85 @@
+version: '2'
+
+services:
+  web:
+    image: thangiee/mars-admin-website:latest
+
+    ports:
+      - "80:9000"
+
+    networks:
+      - mars-front-net
+
+    environment:
+      - MARS_BACKEND_URL=http://backend:8080
+      - MARS_PLAY_SECRET=changeme
+
+    depends_on:
+      - "backend"
+
+  backend:
+    build: ./backend
+
+    volumes:
+      - faces:/app/faces
+
+    ports:
+      - "8080:8080"
+
+    networks:
+      - mars-front-net
+      - mars-back-net
+
+    environment:
+      - MARS_PRIVATE_ADDR=0.0.0.0
+      - MARS_PUBLIC_ADDR=
+      - MARS_PORT=8080
+      - MARS_DB_URL=jdbc:postgresql://db:5432/postgres
+      - MARS_DB_USER=postgres
+      - MARS_DB_PASSWORD=badpass
+      - MARS_DB_DRIVER=org.postgresql.Driver
+      - MARS_EMAIL_ADDR=
+      - MARS_EMAIL_HOST=
+      - MARS_EMAIL_PORT=587
+      - MARS_EMAIL_SMTP_USER=
+      - MARS_EMAIL_SMTP_PASSWORD=
+      - MARS_REG_UUID_TTL_SEC=30
+      - MARS_FACEPP_KEY=
+      - MARS_FACEPP_SECRET=
+      - MARS_TIMESHEET_DIR=/app/timesheets
+      - MARS_FACES_DIR=/app/faces
+
+    depends_on:
+      - "db"
+
+  db:
+    build: ./database
+
+    volumes:
+      - dbdata:/var/lib/postgresql/data
+
+    # Uncomment to open host port 2345. Useful for letting database
+    # tools connect to this db container during dev/debugging.
+    ports:
+      - "2345:5432"
+
+    networks:
+      - mars-back-net
+
+    environment:
+      - POSTGRES_PASSWORD=badpass
+
+volumes:
+  dbdata:
+    external: false
+
+  faces:
+    external: false
+
+
+networks:
+  mars-front-net:
+    driver: bridge
+
+  mars-back-net:
+    driver: bridge
