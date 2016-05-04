@@ -8,7 +8,7 @@ services:
       - "80:9000"
 
     networks:
-      - mars-front-net
+      - mars-net
 
     environment:
       - MARS_BACKEND_URL=http://backend:8080
@@ -27,8 +27,7 @@ services:
       - "8080:8080"
 
     networks:
-      - mars-front-net
-      - mars-back-net
+      - mars-net
 
     environment:
       - MARS_PRIVATE_ADDR=0.0.0.0
@@ -61,10 +60,10 @@ services:
     # Uncomment to open host port 2345. Useful for letting database
     # tools connect to this db container during dev/debugging.
     ports:
-      - "2345:5432"
+      - "5432:5432"
 
     networks:
-      - mars-back-net
+      - mars-net
 
     environment:
       - POSTGRES_PASSWORD=badpass
@@ -78,8 +77,5 @@ volumes:
 
 
 networks:
-  mars-front-net:
-    driver: bridge
-
-  mars-back-net:
+  mars-net:
     driver: bridge
