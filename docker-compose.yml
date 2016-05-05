@@ -9,7 +9,7 @@ services:
       - mars-net
     environment:
       - MARS_BACKEND_URL=http://backend:8080
-      - MARS_PLAY_SECRET=changeme
+      - MARS_PLAY_SECRET="changeme"
     depends_on:
       - "backend"
 
