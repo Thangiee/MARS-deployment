@@ -3,6 +3,7 @@ version: '2'
 services:
   web:
     image: thangiee/mars-admin-website:latest
+    mem_limit: 256m
     ports:
       - "80:9000"
     networks:
@@ -15,6 +16,7 @@ services:
 
   backend:
     build: ./backend
+    mem_limit: 576m
     volumes:
       - faces:/app/faces
       - logs:/logs
@@ -45,6 +47,7 @@ services:
 
   db:
     build: ./database
+    mem_limit: 128m
     volumes:
       - dbdata:/var/lib/postgresql/data
     ports:
