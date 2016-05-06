@@ -3,11 +3,11 @@
 # MARS-deployment
 
 MARS(Mavericks Assistants Reporting System) compose of these components:
-* [MARS-back-end](#https://github.com/Thangiee/MARS-back-end)
-* [MARS-admin-website](#https://github.com/Thangiee/MARS-admin-website)
-* [MARS-android-app](#https://github.com/Thangiee/MARS-android-app)
-* [MARS-iOS-app](#https://github.com/bernaedeeann/MARS-iOS)
-* [MARS-QR-gen](#https://github.com/Thangiee/MARS-QR-gen)
+* [MARS-back-end](https://github.com/Thangiee/MARS-back-end)
+* [MARS-admin-website](https://github.com/Thangiee/MARS-admin-website)
+* [MARS-android-app](https://github.com/Thangiee/MARS-android-app)
+* [MARS-iOS-app](https://github.com/bernaedeeann/MARS-iOS)
+* [MARS-QR-gen](https://github.com/Thangiee/MARS-QR-gen)
 
 Below are instructions to deploy the database, the back-end server, and the admins' website.
 
