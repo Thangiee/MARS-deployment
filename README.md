@@ -13,7 +13,7 @@ Below are instructions to deploy the database, the back-end server, and the admi
 
 ## 1. Setting up Amazon EC2
 
-If you have your own server ready, you can skip to the [next part](#2.-configure-mars-to-run-on-your-server).
+If you have your own server ready, you can skip to the [next part](#2-configure-mars-to-run-on-your-server).
 
 Log into the [AWS Console](https://aws.amazon.com/console/), navigate to the EC2 section and go the **Instances**:
 Press the Launch Instance button. You should be presented with Quick Start wizard:
