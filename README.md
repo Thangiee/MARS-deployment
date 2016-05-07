@@ -63,6 +63,7 @@ One way to do this is to visit http://randomkeygen.com/ and copy the **504-bit W
 the `changeme` value with the key.
 
 Example:
+![img6](https://cloud.githubusercontent.com/assets/4734933/15090279/b9a7d774-13e8-11e6-9f28-75de4634595d.png)
 
 #### `MARS_PUBLIC_ADDR`
 Use your instance public IP address noted earlier or a domain name if available.
@@ -115,25 +116,39 @@ With the configurations set up, we are ready to start up MARS.
 
 3. On your server, `cd` into the MARS-deployment directory.
 
-4. Once you changed to said directory, run:
-   
+4. Once you changed to said directory, run: 
    ```
-   $ docker-compose build
+   $ chmod a+x ./*.sh
+   ```
+   
+5. Execute the setup script:
+   ```
+   $ ./amazon-linux-setup.sh
+   ```
+   
+   This will install docker and docker-compose for you. 
+   
+   If you are not using amazon-linux, see instructions below to install docker and docker-compose for your respective systems.
+   * https://docs.docker.com/engine/installation/
+   * https://docs.docker.com/compose/install/
+   
+6. Once you changed to said directory, run:
+   ```
+   $ sudo docker-compose build
    ```
    
    Wait for it to finish downloading then run:
-   
    ```
-   $ docker-compose up -d
+   $ sudo docker-compose up -d
    ```
    
    Once that finish, the database, the back-end server, and the admins' website should be up and running.
 
-Other useful commands (also needs to be inside the MARS-deployment directory):
+Useful commands (also needs to be inside the MARS-deployment directory):
   * `$ docker-compose down` to stop the MARS.
   * `$ docker-compose logs` to view logs.
   * `$ docker-compose ps` to view information of up and running MARS components.
-  * Details of other commands: [docker-compose](#https://docs.docker.com/compose/reference/) and [docker](#https://docs.docker.com/engine/reference/commandline/cli/)
+  * Details of other commands for [docker-compose](#https://docs.docker.com/compose/reference/) and [docker](#https://docs.docker.com/engine/reference/commandline/cli/)
   
 ## 4. Setting up admin account
 
@@ -161,3 +176,38 @@ Once on the website, follow these steps to set up your admin account:
 9. Go back to the **Account Mngt.** page and switch to the admins tab.
 
 10. Delete the default admin account by typing in net ID `abc123` to confirm deletion.
+
+## Backing up data
+
+While MARS is up and running, you can make a backup at any time by running the backup script located 
+in the MARS-deployment directory.
+ ```
+ $ ./make-backup.sh
+ ```
+
+This script will generate (inside MARS-deployment directory):
+* `./backup/{date and time of backup}/db.sql` - File containing all the data in the database.
+* `./backup/{date and time of backup}/faces` - Directory containing all assistants' face images used for facial recognition.
+
+Example:
+* `./backup/2016-05-06_07:46/db.sql`
+* `./backup/2016-05-06_07:46/faces`
+
+## Restoring data
+
+To restore a previous backup, replace `./database/db.sql` and `./backend/faces` with their respective backup file.
+
+Next, stop MARS with:
+```
+$ docker-compose down -v
+```
+
+then:
+```
+$ docker-compose build
+```
+
+finally:
+```
+$ docker-compose up -d
+```
