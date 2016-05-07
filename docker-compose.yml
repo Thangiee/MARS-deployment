@@ -9,6 +9,7 @@ services:
     networks:
       - mars-net
     environment:
+      - TZ=US/Central
       - MARS_BACKEND_URL=http://backend:8080
       - MARS_PLAY_SECRET="changeme"
     depends_on:
@@ -25,6 +26,7 @@ services:
     networks:
       - mars-net
     environment:
+      - TZ=US/Central
       - MARS_PRIVATE_ADDR=0.0.0.0
       - MARS_PUBLIC_ADDR=
       - MARS_PORT=8080
@@ -55,6 +57,7 @@ services:
     networks:
       - mars-net
     environment:
+      - TZ=US/Central
       - POSTGRES_PASSWORD=badpass
 
 volumes:
@@ -64,7 +67,6 @@ volumes:
     external: false
   logs:
     external: false
-
 
 networks:
   mars-net:
